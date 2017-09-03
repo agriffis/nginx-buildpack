@@ -157,7 +157,7 @@ set-vars() {
     fi
 
     # Override $PORT for the app
-    PORT=$NGINX_SOCKET
+    PORT=1337
 
     export ${!NGINX_*} PORT
 }
