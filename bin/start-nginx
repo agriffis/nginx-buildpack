@@ -143,23 +143,11 @@ aux-start() {
 
 set-vars() {
     : ${NGINX_ENABLED:=1}
-    : ${NGINX_LISTEN:=$PORT}
-    : ${NGINX_SOCKET:=/tmp/nginx.socket}
-    : ${NGINX_WAIT_FILE:=$NGINX_SOCKET}
+    : ${NGINX_WAIT_FILE:="/tmp/app-initialized"}
     : ${NGINX_WAIT_ENABLED:=1}
     : ${NGINX_WORKERS:=4}
-    NGINX_GZIP_ENABLED=$(norm-enabled "${NGINX_GZIP_ENABLED:-1}")
-    : ${NGINX_GZIP_PROXIED:=any}
-    NGINX_GZIP_TYPES=$(expand-types "${NGINX_GZIP_TYPES:-plain css javascript json xml atom+xml rss+xml}")
 
-    if [[ $NGINX_SOCKET == /* ]]; then
-        NGINX_SOCKET=unix:$NGINX_SOCKET
-    fi
-
-    # Override $PORT for the app
-    PORT=$NGINX_SOCKET
-
-    export ${!NGINX_*} PORT
+    export ${!NGINX_*}
 }
 
 expand-types() {

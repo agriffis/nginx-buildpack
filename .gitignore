@@ -1,0 +1,9 @@
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/log
+/tmp
+
+#Rubymine
+.idea
+.generators
+.rakeTasks
